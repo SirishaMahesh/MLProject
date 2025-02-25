@@ -1,0 +1,5 @@
+# Drop missing values and select relevant columns
+data = df.dropna().select("title", "text", "label")
+
+# Show processed data
+display(data)
