@@ -1,0 +1,23 @@
+# Import necessary libraries
+from pyspark.sql.types import StructType, StructField, StringType, IntegerType
+
+# Define schema explicitly for better control
+schema = StructType([
+    StructField("id", StringType(), True),
+    StructField("title", StringType(), True),
+    StructField("author", StringType(), True),
+    StructField("text", StringType(), True),
+    StructField("label", IntegerType(), True)  # Ensure label is an integer
+])
+
+# File location
+file_location = "dbfs:/FileStore/tables/WELFake_Dataset.csv"
+
+# Load data
+df = spark.read.format("csv") \
+    .option("header", "true") \
+    .schema(schema) \
+    .load(file_location)
+
+# Display data
+display(df)
